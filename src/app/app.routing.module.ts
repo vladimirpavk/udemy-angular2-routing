@@ -11,6 +11,7 @@ import { ServerComponent } from './servers/server/server.component';
 import { ServersService } from './servers/servers.service';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { ErrorPageComponent } from './error-page/error-page.component';
+import { ServerResolver } from './servers/server/server-resolver.service';
 
 export const appRoutes: Route[] = [
     // { path:'', redirectTo: '/home', pathMatch: 'full' },
@@ -19,11 +20,10 @@ export const appRoutes: Route[] = [
        { path: ':id/:name', component: UserComponent }
      ] },  
      { path: 'servers', component: ServersComponent, children: [
-        { path: ':id', component: ServerComponent },
+        { path: ':id', component: ServerComponent, resolve: { server : ServerResolver } },
         { path: ':id/edit', component: EditServerComponent }]
      },
-     //{ path: 'not-found', component: PageNotFoundComponent },
-     { path:'not-found', component: ErrorPageComponent, data: {message:"Some problem occured"} },
+     { path: 'not-found', component: PageNotFoundComponent, data: { message: "Some other message"} },
      { path: '**', redirectTo: '/not-found'}
      ];
 

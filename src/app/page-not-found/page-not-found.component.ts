@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Data } from '@angular/router';
 
 @Component({
   selector: 'app-page-not-found',
@@ -7,9 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PageNotFoundComponent implements OnInit {
 
-  constructor() { }
+  errorMessage: string = "Default error message";
+
+  constructor(public route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.errorMessage = this.route.snapshot.data['message'];
+    this.route.data.subscribe(
+      (data:Data)=>{
+        this.errorMessage = data['message'];
+      }
+    );
+    
   }
 
 }

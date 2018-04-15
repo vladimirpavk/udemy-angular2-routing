@@ -17,6 +17,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { ErrorPageComponent } from './error-page/error-page.component';
 
 import { AppRoutingModule } from './app.routing.module'
+import { ServerResolver } from './servers/server/server-resolver.service';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,7 @@ import { AppRoutingModule } from './app.routing.module'
     HttpModule,
     AppRoutingModule
   ],
-  providers: [ServersService],
+  providers: [ServersService, ServerResolver],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
