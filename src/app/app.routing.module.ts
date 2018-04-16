@@ -12,6 +12,7 @@ import { ServersService } from './servers/servers.service';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { ErrorPageComponent } from './error-page/error-page.component';
 import { ServerResolver } from './servers/server/server-resolver.service';
+import { AuthGuardService } from './auth-guard.service';
 
 export const appRoutes: Route[] = [
     // { path:'', redirectTo: '/home', pathMatch: 'full' },
@@ -19,7 +20,7 @@ export const appRoutes: Route[] = [
      { path: 'users', component: UsersComponent, children: [
        { path: ':id/:name', component: UserComponent }
      ] },  
-     { path: 'servers', component: ServersComponent, children: [
+     { path: 'servers', canActivate: [AuthGuardService], component: ServersComponent, children: [
         { path: ':id', component: ServerComponent, resolve: { server : ServerResolver } },
         { path: ':id/edit', component: EditServerComponent }]
      },
